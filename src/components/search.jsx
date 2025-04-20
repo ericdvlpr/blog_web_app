@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import banner from "./../assets/images/banner.png";
 import { IoSearchOutline } from "react-icons/io5";
 
-function Search({selectTag}) {
-
+function Search({searchTerm}) {
+  const [searchVal, setSearchVal] = useState("");
   const tags = [
     {
       id: 1,
@@ -28,15 +28,20 @@ function Search({selectTag}) {
   ];
   const [activeIndex, setActiveIndex] = useState(0);
   
+  const handleInputChange = (event) => {
+    const newSearchTerm = event.target.value;
+    setSearchVal(newSearchTerm);
+    searchTerm(newSearchTerm);
+  };
   return (
     <div className="flex justify-center mt-8 flex-col px-[70px] md:px-[150px]">
       <img src={banner} className="rounded-2xl " />
       <div className="bg-white shadow-lg p-3 rounded-lg mt-[-20px] mx-[25%] flex item-center">
         <IoSearchOutline className="text-[20px] text-gray-400" />
-        <input type="text" placeholder="Search" className="outline-0 ml-2" />
+        <input type="text" placeholder="Search" className="outline-0 ml-2" value={searchVal} onChange={handleInputChange} />
       </div>
       <div className="flex gap-10 justify-center mt-5">
-        {tags.map((item, index) => (
+        {/* {tags.map((item, index) => (
           <ul key={index}
             onClick={() => {setActiveIndex(index);selectTag(item.name)}}
             className={`${
@@ -45,7 +50,7 @@ function Search({selectTag}) {
           >
             <li>{item.name}</li>
           </ul>
-        ))}
+        ))} */}
       </div>
     </div>
   );
