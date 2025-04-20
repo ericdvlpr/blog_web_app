@@ -1,5 +1,5 @@
 import React,{useEffect, useState} from 'react'
-
+import defaultImg from "./../assets/images/defaultImg.jpg";
 import Search from '../components/search'
 import IntroPost from '../components/introPost'
 import Blogs from '../components/blogs'
@@ -11,40 +11,33 @@ function home() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [post, setPosts] = useState([])
-  const [filterPost, setFilterPost] = useState([])
+
   const [searchItem, setSearchItem] = useState([])
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(()=>{
       getPost();
-      searchPost()
     },[searchItem])
     
     const getPost = ()=>{
-        let url
+
         GlobalApi.getPost.then(res =>{
-            console.log(res.data.results)
-            const result = res.data.results.map(item=>({
+            const result = res.data.map(item=>({
               id: item.id,
               title:item.title,
               desc:item.description,
               tag:item.tags,
-              img:item.image_url,
+              img:item.cover_image ==null? defaultImg : item.cover_image,
               userImg: item.user.profile_image_90,
               userName: item.user.username,
               publish_date: item.published_at
             }));
-            setFilterPost(result)
+          
             setPosts(result)
           })
           
     }
-    const searchPost = ()=>{
-      console.log(filterPost)
-      const filteredPost = filterPost.filter(item=>item.title===searchItem)
-      console.log(filteredPost)
-      setPosts(filteredPost)
-    }
+   
   
   return (
     <div>
