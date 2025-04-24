@@ -1,5 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import defaultImg from "./../assets/images/defaultImg.jpg";
+import defProfPic from "./../assets/images/user.png";
 import Search from '../components/search'
 import IntroPost from '../components/introPost'
 import Blogs from '../components/blogs'
@@ -22,14 +23,15 @@ function home() {
     const getPost = ()=>{
 
         GlobalApi.getPost.then(res =>{
-            const result = res.data.map(item=>({
+          console.log(res)
+            const result = res.data.results.map(item=>({
               id: item.id,
               title:item.title,
               desc:item.description,
               tag:item.tags,
-              img:item.cover_image ==null? defaultImg : item.cover_image,
-              userImg: item.user.profile_image_90,
-              userName: item.user.username,
+              img:item.image_url ==null? defaultImg : item.image_url,
+              userImg: defProfPic,
+              userName: item.authors[0].name,
               publish_date: item.published_at
             }));
           
