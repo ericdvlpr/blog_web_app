@@ -17,13 +17,14 @@ function home() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   useEffect(()=>{
+    
       getPost();
     },[searchItem])
     
     const getPost = ()=>{
 
         GlobalApi.getPost.then(res =>{
-          console.log(res)
+          
             const result = res.data.results.map(item=>({
               id: item.id,
               title:item.title,
@@ -32,7 +33,8 @@ function home() {
               img:item.image_url ==null? defaultImg : item.image_url,
               userImg: defProfPic,
               userName: item.authors[0].name,
-              publish_date: item.published_at
+              publish_date: item.published_at,
+              article_url:item.url
             }));
           
             setPosts(result)
