@@ -2,8 +2,8 @@ import React from 'react'
 
 function Footer() {
   return (
-    <div className='bg-gray-100 text-center mt-5'>
-        <h3 className='text-[14px] p-10'>
+    <div className='text-center mt-5'>
+        <h3 className='text-[14px] p-5'>
 Copyright © 2023</h3>
     </div>
   )

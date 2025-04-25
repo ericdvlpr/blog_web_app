@@ -12,6 +12,7 @@ function home() {
 
   // eslint-disable-next-line react-hooks/rules-of-hooks
   const [post, setPosts] = useState([])
+  const [blogPost, setblogPost] = useState([])
 
   const [searchItem, setSearchItem] = useState([])
 
@@ -36,18 +37,18 @@ function home() {
               publish_date: item.published_at,
               article_url:item.url
             }));
-          
+            setblogPost(result.slice(1))
             setPosts(result)
           })
           
+
+          
     }
-   
-  
   return (
     <div>
-        <Search searchTerm={(term)=>setSearchItem(term)} />
+        {/* <Search searchTerm={(term)=>setSearchItem(term)} /> */}
        {post.length > 0 ? <IntroPost post={post[0]} />:null} 
-        <Blogs posts={post} />
+        <Blogs posts={blogPost} />
       
     </div>
   )
